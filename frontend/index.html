@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokéTracker</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>PokéTracker</h1>
+    </header>
+
+    <section class="busca">
+
+        <input
+            type="text"
+            id="pokemonInput"
+            placeholder="Digite um Pokémon">
+
+        <button id="buscarBtn">
+            Buscar
+        </button>
+
+    </section>
+
+    <main class="container">
+
+        <section id="pokemonCard">
+
+        </section>
+
+        <section id="favoritos">
+
+            <h2>Favoritos</h2>
+
+            <div id="listaFavoritos">
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="./js/api.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/favoritos.js"></script>
+    <script src="./js/app.js"></script>
+
+</body>
+
+</html>
