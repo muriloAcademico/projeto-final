@@ -1,31 +1,23 @@
-const express =
-    require("express");
+const express = require("express");
+const cors = require("cors");
 
-const cors =
-    require("cors");
+const favoritosRoutes = require("./routes/favoritosRoutes");
 
-const app =
-    express();
+const app = express();
 
 app.use(cors());
-
 app.use(express.json());
 
-const favoritosRoutes =
-    require(
-        "./routes/favoritosRoutes"
-    );
+app.use("/favoritos", favoritosRoutes);
 
-app.use(
-    "/favoritos",
-    favoritosRoutes
-);
+app.get("/", (req, res) => {
+    res.json({
+        status: "API funcionando"
+    });
+});
 
-app.listen(
-    3000,
-    () => {
-        console.log(
-            "Servidor rodando"
-        );
-    }
-);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
