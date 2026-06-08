@@ -5,7 +5,7 @@ async function favoritarPokemon(
 ) {
 
     await fetch(
-        "http://localhost:3000/favoritos",
+        "https://projeto-final-devweb.onrender.com/favoritos",
         {
             method: "POST",
             headers: {
@@ -27,7 +27,7 @@ async function carregarFavoritos() {
 
     const resposta =
         await fetch(
-            "http://localhost:3000/favoritos"
+            "https://projeto-final-devweb.onrender.com/favoritos"
         );
 
     const favoritos =
