@@ -1,12 +1,18 @@
 const API_URL =
     "https://projeto-final-devweb.onrender.com";
 
+// Tipos disponíveis localmente em assets/types/
+const TIPOS_DISPONIVEIS = [
+    "bug", "dark", "dragon", "electric", "fairy",
+    "fighting", "fire", "flying", "ghost", "grass",
+    "ground", "ice", "normal", "poison", "psychic",
+    "rock", "steel", "water"
+];
+
 function getTypeIcon(tipo) {
 
-    if (!tipo) {
-
+    if (!tipo || !TIPOS_DISPONIVEIS.includes(tipo)) {
         return "./assets/types/normal.png";
-
     }
 
     return `./assets/types/${tipo}.png`;
@@ -30,33 +36,33 @@ async function adicionarAoTime(
 
         const resposta =
 
-        await fetch(
-            `${API_URL}/equipe`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
-                body: JSON.stringify({
+            await fetch(
+                `${API_URL}/equipe`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+                    body: JSON.stringify({
 
-                    pokemon_id,
-                    nome,
-                    imagem,
+                        pokemon_id,
+                        nome,
+                        imagem,
 
-                    hp,
-                    tipo1,
-                    tipo2,
+                        hp,
+                        tipo1,
+                        tipo2,
 
-                    ataque1,
-                    ataque2,
+                        ataque1,
+                        ataque2,
 
-                    tipo_ataque1,
-                    tipo_ataque2
+                        tipo_ataque1,
+                        tipo_ataque2
 
-                })
-            }
-        );
+                    })
+                }
+            );
 
         const dados =
             await resposta.json();
@@ -79,9 +85,7 @@ async function adicionarAoTime(
 
     } catch (erro) {
 
-        console.error(
-            erro
-        );
+        console.error(erro);
 
     }
 
@@ -117,84 +121,86 @@ async function carregarTime() {
 
             lista.innerHTML += `
                 <div class="time-slot">
-
+ 
                     <div class="time-header">
-
+ 
                         <span class="pokemon-name">
                             ${pokemon.nome}
                         </span>
-
+ 
                         <div class="header-info">
-
+ 
                             <span class="hp">
                                 HP ${pokemon.hp}
                             </span>
-
+ 
                             <img
-                                src="${getTypeIcon(
-                pokemon.tipo1
-            )}"
+                                src="${getTypeIcon(pokemon.tipo1)}"
                                 class="type-icon"
-                                alt="${pokemon.tipo1}"
+                                alt="${pokemon.tipo1 || 'normal'}"
+                                title="${pokemon.tipo1 || 'normal'}"
+                                onerror="this.src='./assets/types/normal.png'"
                             >
-
+ 
                             ${pokemon.tipo2
                     ?
                     `
                                 <img
-                                    src="${getTypeIcon(
-                        pokemon.tipo2
-                    )}"
+                                    src="${getTypeIcon(pokemon.tipo2)}"
                                     class="type-icon"
                                     alt="${pokemon.tipo2}"
+                                    title="${pokemon.tipo2}"
+                                    onerror="this.src='./assets/types/normal.png'"
                                 >
                                 `
                     :
                     ""
                 }
-
+ 
                         </div>
-
+ 
                     </div>
-
+ 
                     <img
                         src="${pokemon.imagem}"
                         class="pokemon-img"
                         alt="${pokemon.nome}"
                     >
-
+ 
                     <div class="attack">
-
+ 
                         <img
-                            src="${getTypeIcon(
-                    pokemon.tipo_ataque1
-                )}"
+                            src="${getTypeIcon(pokemon.tipo_ataque1)}"
                             class="attack-icon"
+                            alt="${pokemon.tipo_ataque1 || 'normal'}"
+                            title="${pokemon.tipo_ataque1 || 'normal'}"
+                            onerror="this.src='./assets/types/normal.png'"
                         >
-
+ 
                         <span>
-                            ${pokemon.ataque1}
+                            ${pokemon.ataque1 || "—"}
                         </span>
-
+ 
                     </div>
-
+ 
                     <div class="attack">
-
+ 
                         <img
-                            src="${getTypeIcon(
-                    pokemon.tipo_ataque2
-                )}"
+                            src="${getTypeIcon(pokemon.tipo_ataque2)}"
                             class="attack-icon"
+                            alt="${pokemon.tipo_ataque2 || 'normal'}"
+                            title="${pokemon.tipo_ataque2 || 'normal'}"
+                            onerror="this.src='./assets/types/normal.png'"
                         >
-
+ 
                         <span>
-                            ${pokemon.ataque2}
+                            ${pokemon.ataque2 || "—"}
                         </span>
-
+ 
                     </div>
-
+ 
                     <div class="acoes">
-
+ 
                         <button
                             onclick="
                             favoritarPokemon(
@@ -205,7 +211,7 @@ async function carregarTime() {
                         >
                             ⭐ Favoritar
                         </button>
-
+ 
                         <button
                             onclick="
                             removerDoTime(
@@ -214,9 +220,9 @@ async function carregarTime() {
                         >
                             🗑 Remover
                         </button>
-
+ 
                     </div>
-
+ 
                 </div>
             `;
 
@@ -224,11 +230,11 @@ async function carregarTime() {
 
             lista.innerHTML += `
                 <div class="time-slot vazio">
-
+ 
                     <p>
                         Slot vazio
                     </p>
-
+ 
                 </div>
             `;
 
