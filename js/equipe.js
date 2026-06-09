@@ -3,6 +3,12 @@ const API_URL =
 
 function getTypeIcon(tipo) {
 
+    if (!tipo) {
+
+        return "./assets/types/normal.png";
+
+    }
+
     return `./assets/types/${tipo}.png`;
 
 }
@@ -23,33 +29,34 @@ async function adicionarAoTime(
     try {
 
         const resposta =
-            await fetch(
-                `${API_URL}/equipe`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-                    body: JSON.stringify({
 
-                        pokemon_id,
-                        nome,
-                        imagem,
+        await fetch(
+            `${API_URL}/equipe`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+                body: JSON.stringify({
 
-                        hp,
-                        tipo1,
-                        tipo2,
+                    pokemon_id,
+                    nome,
+                    imagem,
 
-                        ataque1,
-                        ataque2,
+                    hp,
+                    tipo1,
+                    tipo2,
 
-                        tipo_ataque1,
-                        tipo_ataque2
+                    ataque1,
+                    ataque2,
 
-                    })
-                }
-            );
+                    tipo_ataque1,
+                    tipo_ataque2
+
+                })
+            }
+        );
 
         const dados =
             await resposta.json();
@@ -125,27 +132,26 @@ async function carregarTime() {
 
                             <img
                                 src="${getTypeIcon(
-                                    pokemon.tipo1
-                                )}"
+                pokemon.tipo1
+            )}"
                                 class="type-icon"
                                 alt="${pokemon.tipo1}"
                             >
 
-                            ${
-                                pokemon.tipo2
-                                ?
-                                `
+                            ${pokemon.tipo2
+                    ?
+                    `
                                 <img
                                     src="${getTypeIcon(
-                                        pokemon.tipo2
-                                    )}"
+                        pokemon.tipo2
+                    )}"
                                     class="type-icon"
                                     alt="${pokemon.tipo2}"
                                 >
                                 `
-                                :
-                                ""
-                            }
+                    :
+                    ""
+                }
 
                         </div>
 
@@ -161,8 +167,8 @@ async function carregarTime() {
 
                         <img
                             src="${getTypeIcon(
-                                pokemon.tipo_ataque1
-                            )}"
+                    pokemon.tipo_ataque1
+                )}"
                             class="attack-icon"
                         >
 
@@ -176,8 +182,8 @@ async function carregarTime() {
 
                         <img
                             src="${getTypeIcon(
-                                pokemon.tipo_ataque2
-                            )}"
+                    pokemon.tipo_ataque2
+                )}"
                             class="attack-icon"
                         >
 

@@ -21,7 +21,8 @@ exports.listar = async (req, res) => {
 };
 
 exports.salvar = async (req, res) => {
-
+    console.log("BODY RECEBIDO:");
+    console.log(req.body);
     try {
 
         const {
@@ -72,9 +73,20 @@ exports.salvar = async (req, res) => {
             });
 
         }
-
+            console.log({
+                pokemon_id,
+                nome,
+                imagem,
+                hp,
+                tipo1,
+                tipo2,
+                ataque1,
+                ataque2,
+                tipo_ataque1,
+                tipo_ataque2
+            });
         await connection.query(
-            `
+        `
             INSERT INTO equipe
             (
                 pokemon_id,

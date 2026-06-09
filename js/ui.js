@@ -18,11 +18,11 @@ async function mostrarPokemon(pokemon) {
         <p>
             Tipo:
             ${pokemon.types
-                .map(
-                    tipo =>
+            .map(
+                tipo =>
                     tipo.type.name
-                )
-                .join(", ")}
+            )
+            .join(", ")}
         </p>
 
         <p>
@@ -80,11 +80,11 @@ async function mostrarPokemon(pokemon) {
 
                     let tipoAtaque1 =
                         pokemon.types[0]
-                        .type.name;
+                            .type.name;
 
                     let tipoAtaque2 =
                         pokemon.types[0]
-                        .type.name;
+                            .type.name;
 
                     if (
                         pokemon.moves[0]
@@ -107,7 +107,7 @@ async function mostrarPokemon(pokemon) {
                             );
 
                     }
-
+                    
                     adicionarAoTime(
 
                         pokemon.id,
@@ -126,13 +126,9 @@ async function mostrarPokemon(pokemon) {
                             ?.type.name || "",
 
                         ataque1,
-
                         ataque2,
-
                         tipoAtaque1,
-
                         tipoAtaque2
-
                     );
 
                 } catch (erro) {
