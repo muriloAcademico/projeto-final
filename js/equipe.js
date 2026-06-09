@@ -2,7 +2,9 @@ const API_URL =
     "https://projeto-final-devweb.onrender.com";
 
 function getTypeIcon(tipo) {
+
     return `./assets/types/${tipo}.png`;
+
 }
 
 async function adicionarAoTime(
@@ -13,7 +15,9 @@ async function adicionarAoTime(
     tipo1,
     tipo2,
     ataque1,
-    ataque2
+    ataque2,
+    tipo_ataque1,
+    tipo_ataque2
 ) {
 
     try {
@@ -28,14 +32,21 @@ async function adicionarAoTime(
                             "application/json"
                     },
                     body: JSON.stringify({
+
                         pokemon_id,
                         nome,
                         imagem,
+
                         hp,
                         tipo1,
                         tipo2,
+
                         ataque1,
-                        ataque2
+                        ataque2,
+
+                        tipo_ataque1,
+                        tipo_ataque2
+
                     })
                 }
             );
@@ -45,17 +56,25 @@ async function adicionarAoTime(
 
         if (!resposta.ok) {
 
-            alert(dados.mensagem);
+            alert(
+                dados.mensagem
+            );
 
             return;
 
         }
 
+        alert(
+            dados.mensagem
+        );
+
         await carregarTime();
 
     } catch (erro) {
 
-        console.error(erro);
+        console.error(
+            erro
+        );
 
     }
 
@@ -78,9 +97,14 @@ async function carregarTime() {
 
     lista.innerHTML = "";
 
-    for (let i = 0; i < 6; i++) {
+    for (
+        let i = 0;
+        i < 6;
+        i++
+    ) {
 
-        const pokemon = time[i];
+        const pokemon =
+            time[i];
 
         if (pokemon) {
 
@@ -93,73 +117,107 @@ async function carregarTime() {
                             ${pokemon.nome}
                         </span>
 
-                        <span>
-                        HP ${pokemon.hp}
-                        </span>
+                        <div class="header-info">
+
+                            <span class="hp">
+                                HP ${pokemon.hp}
+                            </span>
+
+                            <img
+                                src="${getTypeIcon(
+                                    pokemon.tipo1
+                                )}"
+                                class="type-icon"
+                                alt="${pokemon.tipo1}"
+                            >
+
+                            ${
+                                pokemon.tipo2
+                                ?
+                                `
+                                <img
+                                    src="${getTypeIcon(
+                                        pokemon.tipo2
+                                    )}"
+                                    class="type-icon"
+                                    alt="${pokemon.tipo2}"
+                                >
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
 
                     </div>
 
                     <img
                         src="${pokemon.imagem}"
                         class="pokemon-img"
+                        alt="${pokemon.nome}"
                     >
 
-                    <div class="tipos">
+                    <div class="attack">
 
-                        <span class="tipo">
-                            ${pokemon.tipo1}
+                        <img
+                            src="${getTypeIcon(
+                                pokemon.tipo_ataque1
+                            )}"
+                            class="attack-icon"
+                        >
+
+                        <span>
+                            ${pokemon.ataque1}
                         </span>
 
-                        ${
-                            pokemon.tipo2
-                            ?
-                            `<span class="tipo">
-                                ${pokemon.tipo2}
-                            </span>`
-                            :
-                            ""
-                        }
+                    </div>
+
+                    <div class="attack">
+
+                        <img
+                            src="${getTypeIcon(
+                                pokemon.tipo_ataque2
+                            )}"
+                            class="attack-icon"
+                        >
+
+                        <span>
+                            ${pokemon.ataque2}
+                        </span>
 
                     </div>
 
-                        <p>
-                            ⚔ ${pokemon.ataque1}
-                        </p>
+                    <div class="acoes">
 
-                        <p>
-                            ⚔ ${pokemon.ataque2}
-                        </p>
+                        <button
+                            onclick="
+                            favoritarPokemon(
+                                ${pokemon.pokemon_id},
+                                '${pokemon.nome}',
+                                '${pokemon.imagem}'
+                            )"
+                        >
+                            ⭐ Favoritar
+                        </button>
 
-                        <div class="acoes">
+                        <button
+                            onclick="
+                            removerDoTime(
+                                ${pokemon.id}
+                            )"
+                        >
+                            🗑 Remover
+                        </button>
 
-                            <button
-                                onclick="
-                                favoritarPokemon(
-                                    ${pokemon.pokemon_id},
-                                    '${pokemon.nome}',
-                                    '${pokemon.imagem}'
-                                )"
-                            >
-                                ⭐ Favoritar
-                            </button>
-
-                            <button
-                                onclick="
-                                removerDoTime(
-                                    ${pokemon.id}
-                                )"
-                            >
-                                🗑 Remover
-                            </button>
-                        </div>
                     </div>
+
                 </div>
             `;
 
         } else {
 
             lista.innerHTML += `
-                <div class="time-slot">
+                <div class="time-slot vazio">
 
                     <p>
                         Slot vazio

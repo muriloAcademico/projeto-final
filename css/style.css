@@ -16,6 +16,12 @@ header {
     padding: 20px;
 }
 
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 .busca {
     display: flex;
     justify-content: center;
@@ -114,13 +120,22 @@ header {
 .time-header {
     display: flex;
     justify-content: space-between;
-    font-weight: bold;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .pokemon-img {
     width: 120px;
+    height: 120px;
+    object-fit: contain;
     display: block;
-    margin: auto;
+    margin: 10px auto;
+}
+
+.pokemon-name {
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: capitalize;
 }
 
 .tipos {
@@ -138,9 +153,30 @@ header {
     font-size: 12px;
 }
 
+.type-icon {
+    width: 24px;
+    height: 24px;
+}
+
 .acoes {
     display: flex;
     gap: 10px;
     justify-content: center;
     margin-top: 10px;
+}
+
+.attack {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.attack-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.hp {
+    font-weight: bold;
 }

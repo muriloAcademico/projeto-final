@@ -32,7 +32,9 @@ exports.salvar = async (req, res) => {
             tipo1,
             tipo2,
             ataque1,
-            ataque2
+            ataque2,
+            tipo_ataque1,
+            tipo_ataque2
         } = req.body;
 
         const [existe] =
@@ -82,9 +84,11 @@ exports.salvar = async (req, res) => {
                 tipo1,
                 tipo2,
                 ataque1,
-                ataque2
+                ataque2,
+                tipo_ataque1,
+                tipo_ataque2
             )
-            VALUES (?,?,?,?,?,?,?,?)
+            VALUES (?,?,?,?,?,?,?,?,?,?)
             `,
             [
                 pokemon_id,
@@ -94,7 +98,9 @@ exports.salvar = async (req, res) => {
                 tipo1,
                 tipo2,
                 ataque1,
-                ataque2
+                ataque2,
+                tipo_ataque1,
+                tipo_ataque2
             ]
         );
 
