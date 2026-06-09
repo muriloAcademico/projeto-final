@@ -35,16 +35,38 @@ header {
 
 .container {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns:
+        2fr 1fr;
+    grid-template-areas:
+        "pokemon time"
+        "favoritos favoritos";
+
     gap: 20px;
     padding: 20px;
 }
 
-#pokemonCard,
-#favoritos {
+#pokemonCard {
+    grid-area: pokemon;
     background: white;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
+    box-shadow:   0 2px 10px rgba(0, 0, 0, .1);
+}
+
+#timePokemon {
+    grid-area: time;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow:  0 2px 10px rgba(0, 0, 0, .1);
+}
+
+#favoritos {
+    grid-area: favoritos;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.1);
 }
 
 #listaFavoritos {
@@ -54,13 +76,33 @@ header {
 }
 
 .favorito-card {
+    width: 120px;
     text-align: center;
     background: #f5f5f5;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 12px;
 }
 
 .favorito-card img {
     display: block;
     margin: auto;
+}
+
+#listaTime {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.time-card {
+    text-align: center;
+
+    background: #f5f5f5;
+
+    padding: 10px;
+
+    border-radius: 12px;
 }

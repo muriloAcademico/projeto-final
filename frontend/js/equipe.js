@@ -1,7 +1,7 @@
 const API_URL =
     "https://projeto-final-devweb.onrender.com";
 
-async function adicionarAoTime(
+await function adicionarAoTime(
     pokemon_id,
     nome,
     imagem
@@ -29,11 +29,15 @@ async function adicionarAoTime(
         const dados =
             await resposta.json();
 
-        alert(
-            dados.mensagem
-        );
+        if (!resposta.ok) {
 
-        carregarTime();
+            alert(dados.mensagem);
+
+            return;
+
+        }
+
+        await carregarTime();
 
     } catch (erro) {
 
@@ -43,7 +47,7 @@ async function adicionarAoTime(
 
 }
 
-async function carregarTime() {
+await function carregarTime() {
 
     const resposta =
         await fetch(
@@ -89,7 +93,7 @@ async function carregarTime() {
 
 }
 
-async function removerDoTime(id) {
+await function removerDoTime(id) {
 
     await fetch(
         `${API_URL}/equipe/${id}`,
@@ -98,6 +102,6 @@ async function removerDoTime(id) {
         }
     );
 
-    carregarTime();
+    await carregarTime();
 
 }

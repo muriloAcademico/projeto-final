@@ -1,69 +1,76 @@
 const connection =
     require("../database/connection");
 
-exports.listar = (req, res) => {
+exports.listar = async (req, res) => {
 
-    connection.query(
-        "SELECT * FROM favoritos",
-        (erro, resultados) => {
+    try {
 
-            if (erro)
-                return res.status(500)
-                .json(erro);
+        const [resultados] =
+            await connection.query(
+                "SELECT * FROM favoritos"
+            );
 
-            res.json(resultados);
-        }
-    );
+        res.json(resultados);
+
+    } catch (erro) {
+
+        res.status(500).json(erro);
+
+    }
+
 };
 
-exports.salvar = (req, res) => {
+exports.salvar = async (req, res) => {
 
-    const {
-        pokemon_id,
-        nome,
-        imagem
-    } = req.body;
+    try {
 
-    connection.query(
-        `
-        SELECT *
-        FROM favoritos
-        WHERE pokemon_id = ?
-        `,
-        [pokemon_id],
-        (erro, resultado) => {
+        const {
+            pokemon_id,
+            nome,
+            imagem
+        } = req.body;
 
-            if (erro)
-                return res.status(500).json(erro);
-
-            if (resultado.length > 0) {
-
-                return res.status(400).json({
-                    mensagem:
-                    "Este Pokémon já está nos favoritos."
-                });
-
-            }
-
-            connection.query(
+        const [existe] =
+            await connection.query(
                 `
-                INSERT INTO favoritos
-                (pokemon_id,nome,imagem)
-                VALUES (?,?,?)
+                SELECT *
+                FROM favoritos
+                WHERE pokemon_id = ?
                 `,
-                [pokemon_id, nome, imagem],
-                (erro) => {
-
-                    if (erro)
-                        return res.status(500).json(erro);
-
-                    res.json({
-                        mensagem:
-                        "Favorito salvo com sucesso!"
-                    });
-
-                }
+                [pokemon_id]
             );
+
+        if (existe.length > 0) {
+
+            return res.status(400).json({
+                mensagem:
+                    "Este Pokémon já está nos favoritos."
+            });
+
         }
-    );
+
+        await connection.query(
+            `
+            INSERT INTO favoritos
+            (pokemon_id,nome,imagem)
+            VALUES (?,?,?)
+            `,
+            [
+                pokemon_id,
+                nome,
+                imagem
+            ]
+        );
+
+        res.json({
+            mensagem:
+                "Favorito salvo com sucesso!"
+        });
+
+    } catch (erro) {
+
+        res.status(500).json(erro);
+
+    }
+
 };
