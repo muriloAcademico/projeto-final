@@ -64,32 +64,62 @@ async function carregarTime() {
 
     lista.innerHTML = "";
 
-    time.forEach(pokemon => {
+    for (let i = 0; i < 6; i++) {
 
-        lista.innerHTML += `
-            <div class="time-card">
+        const pokemon = time[i];
 
-                <img
-                    src="${pokemon.imagem}"
-                    width="80"
-                >
+        if (pokemon) {
 
-                <p>
-                    ${pokemon.nome}
-                </p>
+            lista.innerHTML += `
+                <div class="time-slot">
 
-                <button
-                    onclick="
-                    removerDoTime(
-                        ${pokemon.id}
-                    )">
-                    Remover
-                </button>
+                    <img
+                        src="${pokemon.imagem}"
+                        width="90"
+                    >
 
-            </div>
-        `;
+                    <p>
+                        ${pokemon.nome}
+                    </p>
 
-    });
+                    <button
+                        onclick="
+                        favoritarPokemon(
+                            ${pokemon.pokemon_id},
+                            '${pokemon.nome}',
+                            '${pokemon.imagem}'
+                        )"
+                    >
+                        ⭐ Favoritar
+                    </button>
+                    
+                    <button
+                        onclick="
+                        removerDoTime(
+                            ${pokemon.id}
+                        )"
+                    >
+                       🗑 Remover
+                    </button>
+
+                </div>
+            `;
+
+        } else {
+
+            lista.innerHTML += `
+                <div class="time-slot">
+
+                    <p>
+                        Slot vazio
+                    </p>
+
+                </div>
+            `;
+
+        }
+
+    }
 
 }
 

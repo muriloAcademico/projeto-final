@@ -28,7 +28,7 @@ function mostrarPokemon(pokemon) {
             '${pokemon.name}',
             '${pokemon.sprites.front_default}'
         )">
-            Favoritar
+            ⭐ Favoritar
         </button>
 
         <button onclick="adicionarAoTime(
@@ -36,7 +36,7 @@ function mostrarPokemon(pokemon) {
             '${pokemon.name}',
             '${pokemon.sprites.front_default}'
         )">
-            Adicionar ao Time
+            ➕ Time
         </button>
     `;
 }

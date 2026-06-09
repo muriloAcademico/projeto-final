@@ -82,9 +82,9 @@ async function removerFavorito(id) {
 
     await fetch(
         `https://projeto-final-devweb.onrender.com/favoritos/${id}`,
-    {
-        method: "DELETE"
-    }
+        {
+            method: "DELETE"
+        }
     );
 
     await carregarFavoritos();
