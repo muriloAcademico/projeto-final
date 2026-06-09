@@ -124,7 +124,7 @@ async function carregarTime() {
                             onerror="this.src='./assets/types/normal.png'"
                         >
                         <span>${pokemon.ataque1 || "—"}</span>
-                        <span class="dano">💥 ${pokemon.dano_ataque1 || 0}</span>
+                        <span class="dano">${pokemon.dano_ataque1 || 0}</span>
                     </div>
  
                     <div class="attack">
@@ -136,7 +136,7 @@ async function carregarTime() {
                             onerror="this.src='./assets/types/normal.png'"
                         >
                         <span>${pokemon.ataque2 || "—"}</span>
-                        <span class="dano"> ${pokemon.dano_ataque2 || 0}</span>
+                        <span class="dano">${pokemon.dano_ataque2 || 0}</span>
                     </div>
  
                     <div class="acoes">
