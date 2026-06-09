@@ -74,3 +74,30 @@ exports.salvar = async (req, res) => {
     }
 
 };
+
+exports.remover = async (req, res) => {
+
+    try {
+
+        const id = req.params.id;
+
+        await connection.query(
+            `
+            DELETE FROM favoritos
+            WHERE id = ?
+            `,
+            [id]
+        );
+
+        res.json({
+            mensagem:
+            "Favorito removido."
+        });
+
+    } catch (erro) {
+
+        res.status(500).json(erro);
+
+    }
+
+};

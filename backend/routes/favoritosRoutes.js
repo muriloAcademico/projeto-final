@@ -19,4 +19,9 @@ router.post(
     controller.salvar
 );
 
+router.delete(
+    "/:id",
+    controller.remover
+);
+
 module.exports = router;
