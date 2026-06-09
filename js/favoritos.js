@@ -1,49 +1,32 @@
-async function favoritarPokemon(
-    pokemon_id,
-    nome,
-    imagem
-) {
-
+async function favoritarPokemon(pokemon_id, nome, imagem) {
+ 
     const resposta = await fetch(
         "https://projeto-final-devweb.onrender.com/favoritos",
         {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                pokemon_id,
-                nome,
-                imagem
-            })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ pokemon_id, nome, imagem })
         }
     );
-
+ 
     const dados = await resposta.json();
-
     alert(dados.mensagem);
-
     await carregarFavoritos();
 }
-
+ 
 async function carregarFavoritos() {
-
-    const resposta =
-        await fetch(
-            "https://projeto-final-devweb.onrender.com/favoritos"
-        );
-
-    const favoritos =
-        await resposta.json();
-
-    const lista =
-        document.getElementById(
-            "listaFavoritos"
-        );
+ 
+    const resposta = await fetch(
+        "https://projeto-final-devweb.onrender.com/favoritos"
+    );
+ 
+    const favoritos = await resposta.json();
+ 
+    const lista = document.getElementById("listaFavoritos");
     lista.innerHTML = "";
-
+ 
     favoritos.forEach(pokemon => {
-
+ 
         lista.innerHTML += `
         <div class="favorito-card">
  
@@ -55,19 +38,11 @@ async function carregarFavoritos() {
  
             <p>${pokemon.nome}</p>
  
-            <button
-                onclick="adicionarAoTimePorFavorito(
-                    ${pokemon.pokemon_id}
-                )"
-            >
+            <button onclick="adicionarAoTimePorFavorito(${pokemon.pokemon_id})">
                 ➕ Time
             </button>
  
-            <button
-                onclick="removerFavorito(
-                    ${pokemon.id}
-                )"
-            >
+            <button onclick="removerFavorito(${pokemon.id})">
                 🗑 Remover
             </button>
  
@@ -75,37 +50,45 @@ async function carregarFavoritos() {
         `;
     });
 }
-
-// Busca os dados completos na PokeAPI antes de adicionar ao time
+ 
 async function adicionarAoTimePorFavorito(pokemon_id) {
-
+ 
     try {
-
-        // Busca os dados completos do pokémon na API
+ 
         const pokemon = await buscarPokemonApi(pokemon_id);
-
-        const hpStat = pokemon.stats.find(
-            s => s.stat.name === "hp"
-        );
+ 
+        const hpStat = pokemon.stats.find(s => s.stat.name === "hp");
         const hp = hpStat ? hpStat.base_stat : 0;
-
-        const ataque1 =
-            pokemon.moves[0]?.move.name || "Sem ataque";
-
-        const ataque2 =
-            pokemon.moves[1]?.move.name || "Sem ataque";
-
-        let tipoAtaque1 = pokemon.types[0].type.name;
-        let tipoAtaque2 = pokemon.types[0].type.name;
-
-        if (pokemon.moves[0]) {
-            tipoAtaque1 = await buscarTipoAtaque(ataque1);
-        }
-
-        if (pokemon.moves[1]) {
-            tipoAtaque2 = await buscarTipoAtaque(ataque2);
-        }
-
+ 
+        // Busca dados de todos os ataques em paralelo
+        const dadosTodosAtaques = await Promise.all(
+            pokemon.moves.map(m =>
+                buscarDadosAtaque(m.move.name)
+                    .then(dados => ({
+                        nome:  m.move.name,
+                        tipo:  dados.tipo,
+                        poder: dados.poder
+                    }))
+            )
+        );
+ 
+        // Ordena pelo poder e pega os 2 maiores
+        const ataqueOrdenados = dadosTodosAtaques
+            .filter(a => a.poder > 0)
+            .sort((a, b) => b.poder - a.poder);
+ 
+        const melhoresAtaques =
+            ataqueOrdenados.length >= 2
+                ? ataqueOrdenados.slice(0, 2)
+                : dadosTodosAtaques.slice(0, 2);
+ 
+        const ataque1    = melhoresAtaques[0]?.nome  || "Sem ataque";
+        const ataque2    = melhoresAtaques[1]?.nome  || "Sem ataque";
+        const tipoAtaque1 = melhoresAtaques[0]?.tipo  || "normal";
+        const tipoAtaque2 = melhoresAtaques[1]?.tipo  || "normal";
+        const danoAtaque1 = melhoresAtaques[0]?.poder || 0;
+        const danoAtaque2 = melhoresAtaques[1]?.poder || 0;
+ 
         await adicionarAoTime(
             pokemon.id,
             pokemon.name,
@@ -116,26 +99,25 @@ async function adicionarAoTimePorFavorito(pokemon_id) {
             ataque1,
             ataque2,
             tipoAtaque1,
-            tipoAtaque2
+            tipoAtaque2,
+            danoAtaque1,
+            danoAtaque2
         );
-
+ 
     } catch (erro) {
-
+ 
         console.error(erro);
         alert("Erro ao adicionar Pokémon ao time.");
-
+ 
     }
 }
-
+ 
 async function removerFavorito(id) {
-
+ 
     await fetch(
         `https://projeto-final-devweb.onrender.com/favoritos/${id}`,
-        {
-            method: "DELETE"
-        }
+        { method: "DELETE" }
     );
-
+ 
     await carregarFavoritos();
-
 }
