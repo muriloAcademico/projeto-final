@@ -29,3 +29,4 @@ async function buscarPokemon() {
 }
 
 carregarFavoritos();
+carregarTime();

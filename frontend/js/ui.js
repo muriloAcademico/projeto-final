@@ -14,8 +14,8 @@ function mostrarPokemon(pokemon) {
         <p>
             Tipo:
             ${pokemon.types
-                .map(tipo => tipo.type.name)
-                .join(", ")}
+            .map(tipo => tipo.type.name)
+            .join(", ")}
         </p>
 
         <p>
@@ -29,6 +29,14 @@ function mostrarPokemon(pokemon) {
             '${pokemon.sprites.front_default}'
         )">
             Favoritar
+        </button>
+
+        <button onclick="adicionarAoTime(
+            ${pokemon.id},
+            '${pokemon.name}',
+            '${pokemon.sprites.front_default}'
+        )">
+            Adicionar ao Time
         </button>
     `;
 }
