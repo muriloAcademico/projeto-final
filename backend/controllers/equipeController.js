@@ -27,7 +27,12 @@ exports.salvar = async (req, res) => {
         const {
             pokemon_id,
             nome,
-            imagem
+            imagem,
+            hp,
+            tipo1,
+            tipo2,
+            ataque1,
+            ataque2
         } = req.body;
 
         const [existe] =
@@ -69,13 +74,27 @@ exports.salvar = async (req, res) => {
         await connection.query(
             `
             INSERT INTO equipe
-            (pokemon_id,nome,imagem)
-            VALUES (?,?,?)
+            (
+                pokemon_id,
+                nome,
+                imagem,
+                hp,
+                tipo1,
+                tipo2,
+                ataque1,
+                ataque2
+            )
+            VALUES (?,?,?,?,?,?,?,?)
             `,
             [
                 pokemon_id,
                 nome,
-                imagem
+                imagem,
+                hp,
+                tipo1,
+                tipo2,
+                ataque1,
+                ataque2
             ]
         );
 

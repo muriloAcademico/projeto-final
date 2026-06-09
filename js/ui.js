@@ -34,7 +34,12 @@ function mostrarPokemon(pokemon) {
         <button onclick="adicionarAoTime(
             ${pokemon.id},
             '${pokemon.name}',
-            '${pokemon.sprites.front_default}'
+            '${pokemon.sprites.front_default}',
+            ${pokemon.stats[0].base_stat},
+            '${pokemon.types[0]?.type.name}',
+            '${pokemon.types[1]?.type.name || ""}',
+            '${pokemon.moves[0]?.move.name || ""}',
+            '${pokemon.moves[1]?.move.name || ""}'
         )">
             ➕ Time
         </button>

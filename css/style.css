@@ -110,3 +110,37 @@ header {
     align-items: center;
     background: #fafafa;
 }
+
+.time-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.pokemon-img {
+    width: 120px;
+    display: block;
+    margin: auto;
+}
+
+.tipos {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.tipo {
+    background: #ef5350;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.acoes {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}

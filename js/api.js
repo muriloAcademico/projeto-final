@@ -12,3 +12,17 @@ async function buscarPokemonApi(nome) {
 
     return await resposta.json();
 }
+
+async function buscarTipoAtaque(nomeAtaque) {
+
+    const resposta =
+        await fetch(
+            `https://pokeapi.co/api/v2/move/${nomeAtaque}`
+        );
+
+    const dados =
+        await resposta.json();
+
+    return dados.type.name;
+
+}

@@ -1,10 +1,19 @@
 const API_URL =
     "https://projeto-final-devweb.onrender.com";
 
+function getTypeIcon(tipo) {
+    return `./assets/types/${tipo}.png`;
+}
+
 async function adicionarAoTime(
     pokemon_id,
     nome,
-    imagem
+    imagem,
+    hp,
+    tipo1,
+    tipo2,
+    ataque1,
+    ataque2
 ) {
 
     try {
@@ -21,7 +30,12 @@ async function adicionarAoTime(
                     body: JSON.stringify({
                         pokemon_id,
                         nome,
-                        imagem
+                        imagem,
+                        hp,
+                        tipo1,
+                        tipo2,
+                        ataque1,
+                        ataque2
                     })
                 }
             );
@@ -73,35 +87,72 @@ async function carregarTime() {
             lista.innerHTML += `
                 <div class="time-slot">
 
+                    <div class="time-header">
+
+                        <span class="pokemon-name">
+                            ${pokemon.nome}
+                        </span>
+
+                        <span>
+                        HP ${pokemon.hp}
+                        </span>
+
+                    </div>
+
                     <img
                         src="${pokemon.imagem}"
-                        width="90"
+                        class="pokemon-img"
                     >
 
-                    <p>
-                        ${pokemon.nome}
-                    </p>
+                    <div class="tipos">
 
-                    <button
-                        onclick="
-                        favoritarPokemon(
-                            ${pokemon.pokemon_id},
-                            '${pokemon.nome}',
-                            '${pokemon.imagem}'
-                        )"
-                    >
-                        ⭐ Favoritar
-                    </button>
-                    
-                    <button
-                        onclick="
-                        removerDoTime(
-                            ${pokemon.id}
-                        )"
-                    >
-                       🗑 Remover
-                    </button>
+                        <span class="tipo">
+                            ${pokemon.tipo1}
+                        </span>
 
+                        ${
+                            pokemon.tipo2
+                            ?
+                            `<span class="tipo">
+                                ${pokemon.tipo2}
+                            </span>`
+                            :
+                            ""
+                        }
+
+                    </div>
+
+                        <p>
+                            ⚔ ${pokemon.ataque1}
+                        </p>
+
+                        <p>
+                            ⚔ ${pokemon.ataque2}
+                        </p>
+
+                        <div class="acoes">
+
+                            <button
+                                onclick="
+                                favoritarPokemon(
+                                    ${pokemon.pokemon_id},
+                                    '${pokemon.nome}',
+                                    '${pokemon.imagem}'
+                                )"
+                            >
+                                ⭐ Favoritar
+                            </button>
+
+                            <button
+                                onclick="
+                                removerDoTime(
+                                    ${pokemon.id}
+                                )"
+                            >
+                                🗑 Remover
+                            </button>
+                        </div>
+                    </div>
                 </div>
             `;
 
