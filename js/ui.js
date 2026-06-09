@@ -43,39 +43,19 @@ async function mostrarPokemon(pokemon) {
  
             try {
  
-                // Busca dados de TODOS os ataques em paralelo (mais rápido)
-                const dadosTodosAtaques = await Promise.all(
-                    pokemon.moves.map(m =>
-                        buscarDadosAtaque(m.move.name)
-                            .then(dados => ({
-                                nome:  m.move.name,
-                                tipo:  dados.tipo,
-                                poder: dados.poder
-                            }))
-                    )
-                );
- 
-                // Ordena pelo poder e pega os 2 maiores
-                const ataqueOrdenados = dadosTodosAtaques
-                    .filter(a => a.poder > 0)
-                    .sort((a, b) => b.poder - a.poder);
- 
-                // Se não houver ataques com poder, usa os primeiros
                 const melhoresAtaques =
-                    ataqueOrdenados.length >= 2
-                        ? ataqueOrdenados.slice(0, 2)
-                        : dadosTodosAtaques.slice(0, 2);
+                    await selecionarMelhoresAtaques(pokemon.moves);
  
-                const ataque1 = melhoresAtaques[0]?.nome  || "Sem ataque";
-                const ataque2 = melhoresAtaques[1]?.nome  || "Sem ataque";
-                const tipoAtaque1 = melhoresAtaques[0]?.tipo  || "normal";
-                const tipoAtaque2 = melhoresAtaques[1]?.tipo  || "normal";
-                const danoAtaque1 = melhoresAtaques[0]?.poder || 0;
-                const danoAtaque2 = melhoresAtaques[1]?.poder || 0;
+                const ataque1     = melhoresAtaques[0]?.nome     || "Sem ataque";
+                const ataque2     = melhoresAtaques[1]?.nome     || "Sem ataque";
+                const tipoAtaque1 = melhoresAtaques[0]?.tipo     || "normal";
+                const tipoAtaque2 = melhoresAtaques[1]?.tipo     || "normal";
+                const danoAtaque1 = melhoresAtaques[0]?.poder    || 0;
+                const danoAtaque2 = melhoresAtaques[1]?.poder    || 0;
  
                 console.log("=== MELHORES ATAQUES ===");
-                console.log(`${ataque1} | tipo: ${tipoAtaque1} | poder: ${danoAtaque1}`);
-                console.log(`${ataque2} | tipo: ${tipoAtaque2} | poder: ${danoAtaque2}`);
+                console.log(`${ataque1} | tipo: ${tipoAtaque1} | poder: ${danoAtaque1} | score: ${melhoresAtaques[0]?.score}`);
+                console.log(`${ataque2} | tipo: ${tipoAtaque2} | poder: ${danoAtaque2} | score: ${melhoresAtaques[1]?.score}`);
  
                 await adicionarAoTime(
                     pokemon.id,
@@ -100,5 +80,38 @@ async function mostrarPokemon(pokemon) {
             }
  
         });
+ 
+}
+ 
+// Busca dados de todos os ataques e retorna os 2 com maior score
+async function selecionarMelhoresAtaques(moves) {
+ 
+    const dadosTodos = await Promise.all(
+        moves.map(m =>
+            buscarDadosAtaque(m.move.name)
+                .then(dados => ({
+                    nome:     m.move.name,
+                    tipo:     dados.tipo,
+                    poder:    dados.poder,
+                    precisao: dados.precisao,
+                    pp:       dados.pp,
+                    score:    calcularScore(
+                                  dados.poder,
+                                  dados.precisao,
+                                  dados.pp
+                              )
+                }))
+        )
+    );
+ 
+    // Filtra ataques com score > 0 e ordena do maior para o menor
+    const comScore = dadosTodos
+        .filter(a => a.score > 0)
+        .sort((a, b) => b.score - a.score);
+ 
+    // Fallback: se nenhum ataque tiver score, usa os 2 primeiros da lista
+    return comScore.length >= 2
+        ? comScore.slice(0, 2)
+        : dadosTodos.slice(0, 2);
  
 }

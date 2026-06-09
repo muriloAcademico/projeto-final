@@ -60,34 +60,15 @@ async function adicionarAoTimePorFavorito(pokemon_id) {
         const hpStat = pokemon.stats.find(s => s.stat.name === "hp");
         const hp = hpStat ? hpStat.base_stat : 0;
  
-        // Busca dados de todos os ataques em paralelo
-        const dadosTodosAtaques = await Promise.all(
-            pokemon.moves.map(m =>
-                buscarDadosAtaque(m.move.name)
-                    .then(dados => ({
-                        nome:  m.move.name,
-                        tipo:  dados.tipo,
-                        poder: dados.poder
-                    }))
-            )
-        );
- 
-        // Ordena pelo poder e pega os 2 maiores
-        const ataqueOrdenados = dadosTodosAtaques
-            .filter(a => a.poder > 0)
-            .sort((a, b) => b.poder - a.poder);
- 
         const melhoresAtaques =
-            ataqueOrdenados.length >= 2
-                ? ataqueOrdenados.slice(0, 2)
-                : dadosTodosAtaques.slice(0, 2);
+            await selecionarMelhoresAtaques(pokemon.moves);
  
-        const ataque1    = melhoresAtaques[0]?.nome  || "Sem ataque";
-        const ataque2    = melhoresAtaques[1]?.nome  || "Sem ataque";
-        const tipoAtaque1 = melhoresAtaques[0]?.tipo  || "normal";
-        const tipoAtaque2 = melhoresAtaques[1]?.tipo  || "normal";
-        const danoAtaque1 = melhoresAtaques[0]?.poder || 0;
-        const danoAtaque2 = melhoresAtaques[1]?.poder || 0;
+        const ataque1     = melhoresAtaques[0]?.nome     || "Sem ataque";
+        const ataque2     = melhoresAtaques[1]?.nome     || "Sem ataque";
+        const tipoAtaque1 = melhoresAtaques[0]?.tipo     || "normal";
+        const tipoAtaque2 = melhoresAtaques[1]?.tipo     || "normal";
+        const danoAtaque1 = melhoresAtaques[0]?.poder    || 0;
+        const danoAtaque2 = melhoresAtaques[1]?.poder    || 0;
  
         await adicionarAoTime(
             pokemon.id,
