@@ -1,10 +1,17 @@
-CREATE DATABASE poketracker;
+USE railway;
 
-USE poketracker;
-
-CREATE TABLE favoritos(
+CREATE TABLE favoritos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    pokemon_id INT NOT NULL,
+    pokemon_id INT UNIQUE NOT NULL,
     nome VARCHAR(100) NOT NULL,
     imagem VARCHAR(255)
 );
+
+CREATE TABLE equipe (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pokemon_id INT UNIQUE NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    imagem VARCHAR(255)
+);
+
+SHOW TABLES;

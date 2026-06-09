@@ -41,23 +41,48 @@ async function carregarFavoritos() {
             "listaFavoritos"
         );
 
-    lista.innerHTML = "";
+    lista.innerHTML += `
+    <div class="favorito-card">
 
-    favoritos.forEach(pokemon => {
+        <img
+            src="${pokemon.imagem}"
+            alt="${pokemon.nome}"
+            width="80"
+        >
 
-        lista.innerHTML += `
-        <div class="favorito-card">
+        <p>${pokemon.nome}</p>
 
-            <img
-                src="${pokemon.imagem}"
-                alt="${pokemon.nome}"
-                width="80"
-            >
+        <button
+            onclick="adicionarAoTime(
+                ${pokemon.pokemon_id},
+                '${pokemon.nome}',
+                '${pokemon.imagem}'
+            )"
+        >
+            ➕ Time
+        </button>
 
-            <p>${pokemon.nome}</p>
+        <button
+            onclick="removerFavorito(
+                ${pokemon.id}
+            )"
+        >
+            🗑 Remover
+        </button>
 
-        </div>
-    `;
+    </div>
+`;
+}
 
-    });
+async function removerFavorito(id) {
+
+    await fetch(
+        `https://projeto-final-devweb.onrender.com/favoritos/${id}`,
+        {
+            method: "DELETE"
+        }
+    );
+
+    await carregarFavoritos();
+
 }

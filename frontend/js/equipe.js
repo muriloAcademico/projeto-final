@@ -1,7 +1,7 @@
 const API_URL =
     "https://projeto-final-devweb.onrender.com";
 
-await function adicionarAoTime(
+async function adicionarAoTime(
     pokemon_id,
     nome,
     imagem
@@ -47,7 +47,7 @@ await function adicionarAoTime(
 
 }
 
-await function carregarTime() {
+async function carregarTime() {
 
     const resposta =
         await fetch(
@@ -93,7 +93,7 @@ await function carregarTime() {
 
 }
 
-await function removerDoTime(id) {
+async function removerDoTime(id) {
 
     await fetch(
         `${API_URL}/equipe/${id}`,
