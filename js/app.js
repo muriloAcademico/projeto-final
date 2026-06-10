@@ -4,6 +4,20 @@ document
         "click",
         buscarPokemon
     );
+    
+document
+    .getElementById("pokemonInput")
+    .addEventListener("input", () => {
+
+        const valor = document
+            .getElementById("pokemonInput")
+            .value.trim();
+
+        if (valor === "") {
+            document.getElementById("pokemonCard").innerHTML = "";
+        }
+
+    });
 
 async function buscarPokemon() {
 
