@@ -15,19 +15,30 @@
         <h1>PokeTracker</h1>
     </header>
 
-    <section class="busca">
-
-        <input type="text" id="pokemonInput" placeholder="Digite um Pokémon">
-
-        <button id="buscarBtn">
-            Buscar
-        </button>
-
-    </section>
-
     <main class="container">
 
-        <section id="pokemonCard">
+        <section class="pokedex-wrapper">
+
+            <!-- imagem da pokédex como fundo -->
+            <div class="pokedex-bg">
+
+                <!-- área branca onde o pokémon aparece -->
+                <div id="pokemonCard"></div>
+
+                <!-- input em cima de "POKÉMON NAME" -->
+                <input
+                    type="text"
+                    id="pokemonInput"
+                    placeholder="Digite um Pokémon"
+                    class="pokedex-input"
+                >
+
+                <!-- botão em cima de "PUT A DESCRIPTION IN HERE" -->
+                <button id="buscarBtn" class="pokedex-btn">
+                    Buscar
+                </button>
+
+            </div>
 
         </section>
 

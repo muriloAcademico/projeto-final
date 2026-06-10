@@ -19,24 +19,7 @@ header {
 .header-info {
     display: flex;
     align-items: center;
-    gap: 6px;
-}
-
-.busca {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px;
-}
-
-.busca input {
-    width: 300px;
-    padding: 10px;
-}
-
-.busca button {
-    padding: 10px 20px;
-    cursor: pointer;
+    gap: 5px;
 }
 
 .container {
@@ -48,13 +31,109 @@ header {
     gap: 20px;
 }
 
-#pokemonCard {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,.1);
+/* Wrapper centraliza a pokédex */
+.pokedex-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
 
+/* Pokédex: imagem de fundo + elementos posicionados em cima */
+.pokedex-bg {
+    position: relative;
+    width: 480px;
+    height: 500px;
+    background-image: url('../assets/background/pokedex.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Área branca onde o pokémon aparece — ocupa o espaço da tela da pokédex */
+#pokemonCard {
+    position: absolute;
+    top: 20%;
+    left: 9%;
+    width: 82%;
+    height: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+#pokemonCard img {
+    width: 120px;
+    image-rendering: pixelated;
+}
+
+#pokemonCard h2 {
+    font-size: 14px;
+    text-transform: capitalize;
+    margin-bottom: 4px;
+}
+
+#pokemonCard p {
+    font-size: 12px;
+    margin: 2px 0;
+}
+
+#pokemonCard button {
+    font-size: 11px;
+    padding: 4px 10px;
+    margin: 3px 2px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background: #ef5350;
+    color: white;
+}
+
+/* Input em cima de "POKÉMON NAME" */
+.pokedex-input {
+    position: absolute;
+    bottom: 19.5%;
+    left: 20%;
+    width: 60%;
+    height: 5%;
+    background:rgb(151, 211, 92);
+    border: none;
+    outline: none;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #000000;
+    text-align: center;
+    padding: 0 8px;
+    border-radius: 10px;
+}
+
+.pokedex-input::placeholder {
+    color: #000000;
+    letter-spacing: 1px;
+}
+
+/* Botão em cima de "PUT A DESCRIPTION IN HERE" */
+.pokedex-btn {
+    position: absolute;
+    bottom: 5.5%;
+    left: 37%;
+    width: 30%;
+    height: 13%;
+    background:rgb(151, 211, 92);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #000000;
 }
 
 #timePokemon {
@@ -120,9 +199,8 @@ header {
 .time-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 10px;
-    width: 100%;
 }
 
 .pokemon-img {
@@ -137,7 +215,6 @@ header {
     font-weight: bold;
     font-size: 18px;
     text-transform: capitalize;
-    text-align: left;
 }
 
 .tipos {
