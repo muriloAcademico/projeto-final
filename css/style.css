@@ -9,13 +9,6 @@ body {
     background: #f4f4f4;
 }
 
-header {
-    background: #ef5350;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-
 .header-info {
     display: flex;
     align-items: center;
