@@ -1,3 +1,8 @@
+/*
+    favoritos.js
+    Responsável por gerenciar a lista de favoritos via backend,
+    incluindo criação, remoção e adição ao time.
+*/
 async function favoritarPokemon(pokemon_id, nome, imagem) {
 
     const resposta = await fetch(

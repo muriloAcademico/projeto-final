@@ -1,6 +1,12 @@
+/*
+    favoritosController.js
+    Controlador dos favoritos do usuário.
+    Responsável por listar, salvar e remover Pokémons favoritos.
+*/
 const connection =
     require("../database/connection");
 
+// Retorna todos os Pokémons marcados como favoritos.
 exports.listar = async (req, res) => {
 
     try {
@@ -20,6 +26,7 @@ exports.listar = async (req, res) => {
 
 };
 
+// Adiciona um Pokémon aos favoritos, evitando duplicatas de pokemon_id.
 exports.salvar = async (req, res) => {
 
     try {
@@ -75,6 +82,7 @@ exports.salvar = async (req, res) => {
 
 };
 
+// Remove um favorito pelo ID do registro.
 exports.remover = async (req, res) => {
 
     try {

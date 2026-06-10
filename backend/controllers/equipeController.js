@@ -1,6 +1,12 @@
+/*
+    equipeController.js
+    Controlador da equipe do usuário.
+    Responsável por listar, adicionar e remover Pokémons do time.
+*/
 const connection =
     require("../database/connection");
  
+// Retorna todos os Pokémons atualmente salvos na equipe.
 exports.listar = async (req, res) => {
  
     try {
@@ -20,6 +26,7 @@ exports.listar = async (req, res) => {
  
 };
  
+// Adiciona um Pokémon ao time, validando duplicidade e limite de 6 membros.
 exports.salvar = async (req, res) => {
  
     try {
@@ -93,6 +100,7 @@ exports.salvar = async (req, res) => {
  
 };
  
+// Remove um Pokémon da equipe pelo ID do registro.
 exports.remover = async (req, res) => {
  
     try {

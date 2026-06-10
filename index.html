@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+<!--
+    index.html - PokeTracker
+    Descrição:
+      Página principal da aplicação PokeTracker usada para buscar
+      Pokémons, exibir informações, e gerenciar o time e a lista de favoritos.
+
+    Estrutura principal:
+      - <main class="container">: container principal da interface.
+      - <section class="pokedex-wrapper">: área de busca e exibição do Pokémon.
+      - #pokemonCard: área onde o card do Pokémon é renderizado dinamicamente.
+      - #pokemonInput: campo de busca para o nome do Pokémon.
+      - #buscarBtn: botão para iniciar a busca do Pokémon.
+      - #timePokemon / #listaTime: seção para exibir o time do usuário.
+      - #favoritos / #listaFavoritos: seção para exibir Pokémons favoritos.
+
+    Scripts carregados:
+      - js/api.js: chamada à API de Pokémon e tratamento de dados.
+      - js/ui.js: construção e atualização dos elementos visuais.
+      - js/favoritos.js: lógica de favoritos e persistência local.
+      - js/equipe.js: lógica de gerenciamento do time de Pokémons.
+      - js/app.js: inicialização do app e registro de eventos.
+-->
 <html lang="pt-BR">
 
 <head>
@@ -15,13 +37,13 @@
 
         <section class="pokedex-wrapper">
 
-            <!-- imagem da pokédex como fundo -->
+            <!-- Imagem da pokédex como fundo -->
             <div class="pokedex-bg">
 
-                <!-- área branca onde o pokémon aparece -->
+                <!-- Área branca onde o pokémon aparece -->
                 <div id="pokemonCard"></div>
 
-                <!-- input em cima de "POKÉMON NAME" -->
+                <!-- Input principal para busca de pokémon, posicionado na Pokédex" -->
                 <input
                     type="text"
                     id="pokemonInput"
@@ -29,7 +51,7 @@
                     class="pokedex-input"
                 >
 
-                <!-- botão em cima de "PUT A DESCRIPTION IN HERE" -->
+                <!-- Botão de buscar pokémon, posicionado na Pokédex" -->
                 <button id="buscarBtn" class="pokedex-btn">
                     Buscar
                 </button>
@@ -56,6 +78,7 @@
 
     </main>
 
+    <!-- Scripts do aplicativo: API, interface, favoritos, equipe e inicialização -->
     <script src="./js/api.js"></script>
     <script src="./js/ui.js"></script>
     <script src="./js/favoritos.js"></script>

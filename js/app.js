@@ -1,3 +1,8 @@
+/*
+    app.js
+    Entrada principal da aplicação. Inicializa eventos
+    e dispara a busca de Pokémon e o carregamento inicial.
+*/
 document
     .getElementById("buscarBtn")
     .addEventListener(

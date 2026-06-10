@@ -1,3 +1,8 @@
+/*
+    favoritosRoutes.js
+    Define as rotas da API para o recurso 'favoritos'.
+    Encaminha as requisições para o controller responsável.
+*/
 const express =
     require("express");
 

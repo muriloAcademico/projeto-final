@@ -1,3 +1,8 @@
+/*
+    equipe.js
+    Responsável por gerenciar a equipe do usuário pelo backend,
+    carregar os slots do time e remover Pokémons.
+*/
 const API_URL =
     "https://projeto-final-devweb.onrender.com";
  

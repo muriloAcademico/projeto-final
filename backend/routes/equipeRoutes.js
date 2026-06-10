@@ -1,3 +1,8 @@
+/*
+    equipeRoutes.js
+    Define as rotas da API para o recurso 'equipe'.
+    Encaminha as requisições para o controller responsável.
+*/
 const express =
     require("express");
 

@@ -1,3 +1,8 @@
+/*
+    api.js
+    Responsável pelas chamadas à API externa do Pokémon (PokeAPI)
+    e pelos cálculos de score de ataques.
+*/
 const POKE_API = "https://pokeapi.co/api/v2/pokemon/";
  
 async function buscarPokemonApi(nome) {

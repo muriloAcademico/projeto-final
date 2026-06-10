@@ -1,3 +1,9 @@
+/*
+    ui.js
+    Responsável por renderizar o card do Pokémon na interface,
+    registrar eventos de favoritar e adicionar ao time,
+    e selecionar os melhores ataques.
+*/
 async function mostrarPokemon(pokemon) {
 
     const card =
