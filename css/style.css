@@ -19,7 +19,7 @@ header {
 .header-info {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
 }
 
 .busca {
@@ -120,8 +120,9 @@ header {
 .time-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 10px;
+    width: 100%;
 }
 
 .pokemon-img {
@@ -136,6 +137,7 @@ header {
     font-weight: bold;
     font-size: 18px;
     text-transform: capitalize;
+    text-align: left;
 }
 
 .tipos {
