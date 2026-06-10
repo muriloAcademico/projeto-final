@@ -43,7 +43,7 @@ header {
     position: relative;
     width: 480px;
     height: 500px;
-    background-image: url('../assets/background/pokedex.jpg');
+    background-image: url('../assets/pokedex.jpg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
