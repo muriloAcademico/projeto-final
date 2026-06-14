@@ -9,7 +9,7 @@ Conteúdo principal
 
 Links úteis
 - Ícones de tipo (coleção): https://archives.bulbagarden.net/wiki/Category:Type_icons
-- Imagem da Pokédex (Pinterest): https://pt.pinterest.com/pin/153896512262639223/e
+- Pesquisa da Pokédex (Pinterest): https://www.pinterest.com/search/pins/?q=pokedex%20layout%20idea
 - Pesquisa de wallpaper (Pinterest): https://www.pinterest.com/search/pins/?q=wallpaper%20pokemon%20gameboy
 
 Como usar
