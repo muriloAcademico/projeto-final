@@ -143,6 +143,8 @@ Este diretório contém o estilo visual do projeto PokeTracker.
 - `index.html`: contém a marcação principal da interface, incluindo os IDs
   `pokemonCard`, `pokemonInput`, `buscarBtn`, `listaTime` e `listaFavoritos`.
 - `assets/`: contém imagens usadas no fundo da Pokédex e nos ícones de tipo.
+  Veja [assets/README.md](assets/README.md) para detalhes sobre as imagens e
+  ícones de tipo.
 - `backend/`: servidor e rotas para persistência de dados de favoritos e time.
 - `backend/database/`: configuração de banco de dados e scripts de criação de
   tabelas.
