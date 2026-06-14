@@ -146,6 +146,8 @@ Este diretório contém o estilo visual do projeto PokeTracker.
   Veja [assets/README.md](assets/README.md) para detalhes sobre as imagens e
   ícones de tipo.
 - `backend/`: servidor e rotas para persistência de dados de favoritos e time.
+  Veja [backend/README.md](backend/README.md) para documentação da API, variáveis
+  de ambiente e instruções de execução.
 - `backend/database/`: configuração de banco de dados e scripts de criação de
   tabelas.
 
