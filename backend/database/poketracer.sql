@@ -1,6 +1,6 @@
 USE railway;
 
-CREATE TABLE favoritos (
+CREATE TABLE IF NOT EXISTS favoritos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     pokemon_id INT UNIQUE NOT NULL,
     nome VARCHAR(100) NOT NULL,
